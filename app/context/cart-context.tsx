@@ -19,7 +19,6 @@ type CartProviderProps = {
 type CartItem = {
   id: number;
   name: string;
-  image: string;
   price: number;
 };
 
@@ -27,18 +26,15 @@ type CartItem = {
 export function CartProvider({ children }: CartProviderProps) {
   
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
-    if (typeof window !== 'undefined') {
       const storedCartItems = localStorage.getItem('cartItems');
       return storedCartItems ? JSON.parse(storedCartItems) : [];
-    }
-    return [];
   });
 
   const addToCart = (item: CartItem) => {
+    const isItemInCart = cartItems.find((cartItem) => cartItem.id === item.id);
 
-    const existingItemIndex = cartItems.findIndex((cartItem) => cartItem.id === item.id);
-    if (!!existingItemIndex) {
-      setCartItems([...cartItems, { ...item}]);
+    if (!isItemInCart) {
+      setCartItems([...cartItems, { ...item }]);
     }
   };
 

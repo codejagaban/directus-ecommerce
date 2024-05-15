@@ -2,13 +2,13 @@
 
 import { CartContext } from "@/app/context/cart-context";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import Link from 'next/link'
 
 export default function SearchBar() {
   const router = useRouter();
   const searchParams = useSearchParams()
-
+  const [isClient, setIsClient] = useState(false)
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -20,7 +20,10 @@ export default function SearchBar() {
   };
 
   const cart = useContext(CartContext);
-  return (
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+   return isClient &&  (
     <div>
       <div>
 
