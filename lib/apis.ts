@@ -3,21 +3,6 @@ import { readItems, createItem, updateItems } from "@directus/sdk";
 
 import { OrderTypes } from "@/types";
 
-export const getProductsByCategory = async (category: string) => {
-  const results = await directus.request(
-    readItems("products", {
-      filter: {
-        category: {
-          name: {
-            _eq: category,
-          },
-        },
-      },
-    })
-  );
-  return results;
-};
-
 export const getAllProducts = async () => {
   try {
     const results = await directus.request(

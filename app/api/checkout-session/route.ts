@@ -25,7 +25,7 @@ export async function POST(req: Request) {
   }: RequestData = await req.json();
 
   const order_no = generateOrderNum();
-  // Assume products is an array of objects, each with a name, description, price, and quantity
+
   const line_items = products.map(product => ({
     quantity: 1,
     price_data: {
